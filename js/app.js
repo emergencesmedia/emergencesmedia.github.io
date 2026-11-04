@@ -137,6 +137,7 @@ function emergeBlock(){
       '<div class="field"><label for="p-mail">Ton e-mail</label><input id="p-mail" name="email" type="email" required autocomplete="email"></div></div>'+
       '<div class="field"><label for="p-theme">Thème</label><select id="p-theme" name="theme">'+D.themes.map(function(t){return '<option>'+esc(t.name)+'</option>';}).join("")+'<option>Autre</option></select></div>'+
       '<div class="field"><label for="p-projet">Le projet en quelques lignes</label><textarea id="p-projet" name="projet" required></textarea></div>'+
+      '<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'+
       '<div><button class="btn dark" type="submit">Envoyer à la rédaction</button></div>'+
       '<p class="notice">Tu préfères écrire directement ? '+esc(D.site.email)+'</p>'+
     '</form></div>'+
@@ -538,14 +539,20 @@ function boot(){
     var f=e.target;if(!f.classList.contains("js-form"))return;e.preventDefault();
     var bad=$$("[required]",f).filter(function(i){return !i.value.trim()||(i.type==="email"&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(i.value));});
     if(bad.length){bad[0].focus();toast(bad[0].type==="email"?"Vérifiez l'adresse e-mail":"Ce champ est obligatoire");return;}
-    /* Pas de serveur : on prépare un e-mail adressé à la rédaction dans la messagerie du visiteur. */
+    /* Envoi direct dans la boîte de la rédaction via FormSubmit (gratuit). Repli : messagerie du visiteur. */
     var v=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():"";};
-    var body="Prénom : "+v("nom")+"\nE-mail : "+v("email")+"\nThème : "+v("theme")+"\n\n"+v("projet");
-    var href="mailto:"+D.site.email+"?subject="+encodeURIComponent("Appel à projets · "+v("nom"))+"&body="+encodeURIComponent(body);
-    try{window.location.href=href;}catch(err){}
-    var d=document.createElement("div");d.className="ok";d.setAttribute("role","status");
-    d.innerHTML="Ta messagerie s'ouvre avec ton message prêt à partir : il ne reste qu'à l'envoyer. Rien ne s'ouvre ? Écris-nous directement :"+mailBox(true);
-    f.replaceWith(d);
+    if(v("_honey"))return;
+    var btn=f.querySelector('[type=submit]');if(btn){btn.disabled=true;btn.textContent="Envoi…";}
+    var done=function(html){var d=document.createElement("div");d.className="ok";d.setAttribute("role","status");d.innerHTML=html;f.replaceWith(d);};
+    var fallback=function(){
+      var body="Prénom : "+v("nom")+"\nE-mail : "+v("email")+"\nThème : "+v("theme")+"\n\n"+v("projet");
+      try{window.location.href="mailto:"+D.site.email+"?subject="+encodeURIComponent("Appel à projets · "+v("nom"))+"&body="+encodeURIComponent(body);}catch(err){}
+      done("L'envoi direct n'a pas fonctionné : ta messagerie s'ouvre avec ton message prêt à partir. Rien ne s'ouvre ? Écris-nous directement :"+mailBox(true));
+    };
+    fetch("https://formsubmit.co/ajax/"+D.site.email,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({_subject:"Appel à projets · "+v("nom"),_template:"table",_replyto:v("email"),"Prénom":v("nom"),"E-mail":v("email"),"Thème":v("theme"),"Projet":v("projet")})})
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(r.ok&&String(j.success)!=="false")done("Merci "+esc(v("nom"))+" ! Ton projet est bien arrivé à la rédaction. On te répond à "+esc(v("email"))+".");else fallback();});})
+      .catch(fallback);
   });
   document.addEventListener("keydown",function(e){
     if(e.key==="Escape"){if($("#search").classList.contains("open"))closeSearch();else if($("#menu").classList.contains("open"))closeMenu();}
