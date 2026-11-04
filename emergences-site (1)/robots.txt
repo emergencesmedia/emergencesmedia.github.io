@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emergencesmedia.com/sitemap.xml
