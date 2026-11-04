@@ -74,6 +74,24 @@ window.EMERGENCES = {
 
   articles: [
     {
+      slug: "lettre-a-l-engagement", themes: ["societe"], format: "Tribune", featured: true,
+      title: "Lettre à l'engagement",
+      chapo: "À vingt ans, on sort de sa bulle et on choisit son rapport au monde. Une lettre à celles et ceux qui hésitent encore à traverser le pont entre ce qu'ils pensent et ce qu'ils font.",
+      author: "La rédaction", date: "5 novembre 2026", dateISO: "2026-11-05", read: 4,
+      cover: { big: "20 ans", small: "l'âge de choisir son rapport au monde" },
+      photo: "",
+      body: [
+        { p: "À l'âge où on découvre réellement le monde, nos 20 ans, il est important de penser, ou du moins de repenser, notre rapport à celui-ci." },
+        { p: "La vingtaine est un moment clef où nous sommes presque forcés de sortir de cette bulle dans laquelle on a grandi jusqu'à maintenant et de se lancer à la recherche du monde et de soi. C'est une période où ce qui nous touchait enfant ne nous touche plus forcément, alors que d'autres sensibilités, déjà présentes dans l'enfance, se renforcent. C'est cet esprit vif mais plus mûr, plus réfléchi, qui doit choisir le monde dans lequel il veut évoluer et quel rapport il veut entretenir avec lui." },
+        { p: "À notre âge, la politique peut sembler lointaine : une affaire de grandes lignes et de polémiques qui nous touchent peu. Pourtant, elle est d'abord une question de priorités. Que voulons-nous conserver, créer ou modifier ? De quoi avons-nous peur, et lesquelles de ces peurs nous a-t-on transmises plutôt que de les avoir choisies ? Lesquelles pouvons-nous affronter ensemble, en tant que société ? Quel sentiment voulons-nous éprouver lorsque nous pensons au monde, et à notre propre place dans celui-ci ?" },
+        { p: "Ces questions, chacun doit d'abord se les poser seul, en prenant du recul sur ce que son éducation et ses croyances lui ont appris : que voulons-nous, en tant qu'ensemble, que communauté ? Quand on s'est vraiment posé ces questions, on repère vite les discours qui s'arrêtent à la surface, ceux qui offrent des réponses toutes faites à ce qu'on n'a pas encore creusé. Notre propre réflexion n'a de sens que si elle débouche sur l'action. L'action est le pont entre le monde tel qu'il est et celui qu'on veut voir en place." },
+        { quote: "L'action est le pont entre le monde tel qu'il est et celui qu'on veut voir en place." },
+        { p: "Or ce pont, beaucoup d'entre nous hésitent à le traverser. On sent, dans notre génération, un repli sur la sphère privée : quand, dans le monde autour, tout paraît incertain, on se concentre sur ce qu'on peut maîtriser, ses proches, ses études, son avenir immédiat. Mais que nous nous en occupions ou non, l'espace public décide de ce dans quoi nous vivons : le prix des loyers, l'état de la planète, l'accès aux soins, la valeur de nos diplômes. Ces choix seront faits, avec nous ou sans nous. Donc autant être là quand ils se prennent." },
+        { p: "Et nous avons de quoi peser. Notre génération grandit exposée, chaque jour, aux problèmes du monde : elle les voit, elle les ressent, et elle sait déjà ce qu'elle voudrait changer. Il lui manque moins d'idées que d'occasions de les faire entendre. Il ne s'agit pas de tout bousculer du jour au lendemain, mais de s'investir, chacun à sa façon : voter, s'associer, se présenter, agir près de chez soi." },
+        { p: "Alors, si on dézoome, qu'on sort de cette explication trop longue pour un principe trop simple : il faut que nous tous, jeunes de ce monde, animés de principes et de valeurs propres, nous engagions sans peur de la différence des opinions, qui enrichit la réflexion, et décidions ensemble ce que nous voulons pour notre monde." }
+      ]
+    },
+    {
       slug: "qui-a-interet-a-ce-qu-on-ait-peur", themes: ["societe"], format: "Article", featured: true,
       title: "Qui a intérêt à ce qu'on ait peur ?",
       chapo: "40 % des Français disent que la peur est l'émotion qui décrit le mieux leur état d'esprit. Comprendre pourquoi on a peur ne suffit pas : il faut se demander à qui cette peur profite, et si l'on peut faire de l'information autrement.",

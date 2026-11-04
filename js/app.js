@@ -100,7 +100,7 @@ function pageHome(){
   '<section class="sec"><div class="wrap">'+
     '<div class="sec-head"><h2>À la une</h2></div>'+
     '<a class="feature rv" data-c="'+main(lead).color+'" href="#a-'+lead.slug+'">'+vis(lead)+'<div class="ftxt">'+meta(lead)+'<h3>'+esc(lead.title)+'</h3><p>'+esc(lead.chapo)+'</p><span class="more">Lire l\'article</span></div></a>'+
-    (others.length?'<div class="list" style="margin-top:44px">'+others.slice(0,3).map(card).join("")+'</div>':"")+
+    (others.length?'<div class="more-list">'+others.slice(0,3).map(function(x){return card(x).replace('class="card rv"','class="card row rv"');}).join("")+'</div>':"")+
     '<div class="prog4"><h3 class="kicker">Au programme</h3><div class="tiles">'+tiles+'</div></div>'+
   '</div></section>'+
 
