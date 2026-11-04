@@ -651,3 +651,19 @@ form.box{display:grid;gap:12px;margin-top:22px;max-width:560px}
 /* Couvertures en petit format : badge E masqué, chiffre plus compact */
 .card .vis.cover .cv-e{display:none}
 .card .vis.cover .cv-big{font-size:clamp(2.6rem,6vw,4.6rem)}
+
+/* ===== Couvertures v2 : bandes ondulées de la DA + étiquettes collées + sticker ===== */
+.vis.cover::before{display:none}
+.vis.cover{isolation:isolate;justify-content:flex-end;gap:10px}
+.cv-bg{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.cv-st{position:absolute;right:-3%;bottom:-4%;height:82%;width:auto;max-width:62%;object-fit:contain;z-index:-1;transform:rotate(-6deg);filter:drop-shadow(6px 8px 0 rgba(28,27,63,.35));transition:transform .5s var(--ease)}
+a:hover .vis.cover .cv-st{transform:rotate(-2deg) scale(1.05)}
+a:hover .vis.cover img{filter:drop-shadow(6px 8px 0 rgba(28,27,63,.35))}
+.cv-k{position:absolute;left:clamp(14px,2.5vw,26px);top:clamp(14px,2.5vw,26px);background:var(--encre);color:var(--jaune);padding:.45em .7em .4em;font-size:.74rem}
+.cv-big{margin-top:0;display:inline-block;background:var(--encre);color:var(--jaune);-webkit-text-stroke:0;padding:.1em .16em 0;transform:rotate(-3deg);transform-origin:left bottom;box-shadow:7px 7px 0 var(--jaune);font-size:clamp(3rem,9vw,7.2rem);max-width:92%}
+[data-c=jaune] .cv-big,[data-c=ciel] .cv-big{color:var(--jaune);box-shadow:7px 7px 0 var(--violet)}
+.cv-s{background:#fff;color:var(--encre);padding:.4em .6em .35em;font-weight:600;max-width:24ch;transform:rotate(1deg);box-shadow:4px 4px 0 var(--encre);margin-top:6px}
+.vis.cover.has-st .cv-s{max-width:20ch}
+.card .vis.cover .cv-big{font-size:clamp(2.2rem,5vw,3.8rem);box-shadow:5px 5px 0 var(--jaune)}
+.card .vis.cover .cv-s{font-size:.8rem;max-width:18ch}
+.card .vis.cover .cv-k{font-size:.62rem}

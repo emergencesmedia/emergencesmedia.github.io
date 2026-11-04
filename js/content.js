@@ -74,11 +74,55 @@ window.EMERGENCES = {
 
   articles: [
     {
+      slug: "quand-la-violence-couvre-la-voix-de-la-jeunesse", themes: ["societe"], format: "Édito", featured: true,
+      title: "Quand la violence couvre la voix de la jeunesse",
+      chapo: "Les images de violence autour des blocages de lycées ont tourné en boucle. Derrière, il y a des revendications concrètes et légitimes. On les remet au centre, et on liste les moyens de se faire entendre sans les rendre inaudibles.",
+      author: "La rédaction", date: "5 novembre 2026", dateISO: "2026-11-05", read: 5,
+      cover: { big: "53 %", small: "des collèges et lycées publics manquaient d'au moins un prof à la rentrée", color: "violet", sticker: "megaphone" },
+      photo: "",
+      body: [
+        { h: "Notre position" },
+        { p: "Chez Émergences, notre mot d'ordre est l'engagement citoyen. Nous avons le droit, quand nos représentants ne nous conviennent pas ou que le système nous semble trop injuste, de nous engager de différentes façons pour faire changer les choses." },
+        { p: "Quand on a l'impression que nos dirigeants ne nous écoutent plus, la violence peut sembler la seule forme d'engagement qui reste. Le problème, c'est qu'elle délégitime des revendications importantes. Elle efface le vrai changement possible." },
+        { p: "Nous voulons donc, le temps d'un article, remplacer les images de violence qui ont défilé sur les réseaux et dans les médias depuis le début de la mobilisation par les revendications réelles. Elles sont tout à fait légitimes : les lycées sont très inégaux, et la méritocratie a du mal à s'appliquer selon le lycée duquel on sort." },
+        { p: "D'autres voies existent pour se faire entendre, car nous sommes dans une démocratie et des canaux existent. Il est peut-être temps, avec ces événements, de repenser les canaux de communication entre les dirigeants et une jeunesse qui ne se sent plus représentée ni écoutée." },
+        { h: "Les revendications, côté lycéens" },
+        { list: [
+          "Des professeurs remplacés : à la rentrée, il manquait au moins un professeur dans 53 % des collèges et lycées publics selon le SNES-FSU, et environ 7,5 % des heures d'enseignement ne sont pas assurées selon un rapport parlementaire.",
+          "Des classes moins chargées : 30 élèves par classe en moyenne en 2025, contre 27 en 2010.",
+          "Des emplois du temps allégés : 26 à 29 heures de cours obligatoires par semaine, hors options.",
+          "Des bâtiments rénovés : locaux délabrés, chauffage, toilettes, cantines.",
+          "Plus de personnel : infirmières, équipes de direction et de santé scolaire.",
+          "La fin de la pression de Parcoursup, accusé de manquer de transparence et d'opérer une sélection.",
+          "Plus d'égalité entre établissements : les lycéens des banlieues dénoncent un sentiment de relégation."
+        ] },
+        { h: "Les revendications, côté étudiants" },
+        { list: [
+          "Plus de moyens pour l'enseignement supérieur et la fin du « sous-financement structurel » des universités.",
+          "Plus de personnel : chargés de TD sous-payés et manque de moyens en fac.",
+          "Plus de places dans l'enseignement supérieur.",
+          "La fin du gel des APL et une vraie lutte contre la précarité étudiante.",
+          "Une meilleure restauration universitaire : une heure de queue au Crous, des repas à 1 € difficiles à obtenir en pratique.",
+          "Des conditions d'étude dignes : amphis surchargés, chaises cassées.",
+          "Le rejet de la « sélection sociale et raciste » dénoncée par l'Union étudiante."
+        ] },
+        { h: "Les autres moyens de se faire entendre" },
+        { p: "Même le président de l'Union syndicale lycéenne, Ryad Rani, juge les violences contre le personnel éducatif « contre-productives ». Voici des moyens non violents, du plus institutionnel au plus visible." },
+        { fact: "Passer par les organisations lycéennes et étudiantes (USL, Union étudiante, UNEF), qui ont un accès direct au ministère : elles ont été reçues le vendredi 2 octobre par Édouard Geffray. S'appuyer sur les élus du Conseil national de la vie lycéenne et sur les conseils de la vie lycéenne de chaque établissement. Rédiger un cahier de revendications chiffré et priorisé : des demandes concrètes sont plus difficiles à esquiver que des slogans.", label: "1. Se faire représenter et négocier" },
+        { fact: "Organiser des manifestations déclarées et encadrées, avec des enseignants et des parents aux côtés des élèves, comme à Sevran et à Saint-Denis, où leur présence a apaisé les tensions. Rejoindre les journées de grève et de manifestation appelées par les syndicats, comme celle du 6 octobre portée par la FSU, la CGT, Solidaires et SUD. Tenir des assemblées générales pour voter les actions et désigner des porte-parole.", label: "2. Mobiliser pacifiquement" },
+        { fact: "Publier des témoignages et des vidéos qui montrent la réalité du quotidien : classes surchargées, bâtiments dégradés, professeurs absents. Écrire des tribunes, répondre aux médias et rencontrer les élus locaux, comme à Nice et à Bordeaux, où les rectorats ont reçu des représentants lycéens.", label: "3. Parler dans l'espace public" },
+        { p: "La colère de la jeunesse est légitime, et ses demandes sont concrètes. C'est précisément pour qu'elles soient entendues qu'elles doivent rester visibles. Et la violence les rend inaudibles." },
+        { sources: [
+          "Le Monde, « En direct : blocages de lycées, après leur rencontre avec Édouard Geffray, les organisations lycéennes et étudiantes appellent à poursuivre la mobilisation », 2 octobre 2026"
+        ] }
+      ]
+    },
+    {
       slug: "lettre-a-l-engagement", themes: ["societe"], format: "Tribune", featured: true,
       title: "Lettre à l'engagement",
       chapo: "À vingt ans, on sort de sa bulle et on choisit son rapport au monde. Une lettre à celles et ceux qui hésitent encore à traverser le pont entre ce qu'ils pensent et ce qu'ils font.",
       author: "La rédaction", date: "5 novembre 2026", dateISO: "2026-11-05", read: 4,
-      cover: { big: "20 ans", small: "l'âge de choisir son rapport au monde" },
+      cover: { big: "20 ans", small: "l'âge de choisir son rapport au monde", color: "jaune", sticker: "woman" },
       photo: "",
       body: [
         { p: "À l'âge où on découvre réellement le monde, nos 20 ans, il est important de penser, ou du moins de repenser, notre rapport à celui-ci." },
@@ -96,7 +140,7 @@ window.EMERGENCES = {
       title: "Qui a intérêt à ce qu'on ait peur ?",
       chapo: "40 % des Français disent que la peur est l'émotion qui décrit le mieux leur état d'esprit. Comprendre pourquoi on a peur ne suffit pas : il faut se demander à qui cette peur profite, et si l'on peut faire de l'information autrement.",
       author: "La rédaction", date: "", read: 6,
-      cover: { big: "40 %", small: "des Français choisissent « la peur » pour décrire leur état d'esprit" },
+      cover: { big: "40 %", small: "des Français choisissent « la peur » pour décrire leur état d'esprit", color: "rouge", sticker: "mouth" },
       photo: "",   // nom d'une image du dossier assets/ pour remplacer la couverture
       body: [
         { p: "Interrogés sur l'émotion qui décrit le mieux leur état d'esprit aujourd'hui, 40 % des Français répondent spontanément : « la peur »*. Devant la sérénité (34 %), devant l'espoir (21 %). Peur du climat, peur du déclassement, peur de l'autre, peur de l'IA, peur pour l'avenir de nos enfants. La peur n'a jamais occupé une place aussi centrale dans nos sociétés et à 20 ans, on est aux premières loges de ces peurs*." },

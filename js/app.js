@@ -19,12 +19,14 @@ function img(key,alt,cls){return IMG[key]?'<img src="'+IMG[key]+'" alt="'+esc(al
 function isExt(h){return /^https?:/.test(h);}
 var FULL={camerahead:1};
 
+var PAIRS={rouge:["#C82828","#38B6FF"],violet:["#5656BF","#FF4937"],jaune:["#FAE322","#5656BF"],ciel:["#38B6FF","#FAE322"],corail:["#FF4937","#FAE322"]};
 function vis(a){
-  var t=main(a),c=a.cover||{};
-  if(a.photo&&IMG[a.photo])return '<div class="vis full" data-c="'+t.color+'">'+img(a.photo,a.photoAlt||"")+'</div>';
-  return '<div class="vis cover" data-c="'+t.color+'"><span class="cv-k">'+esc(t.name)+'</span>'+
-    '<span class="cv-big">'+esc(c.big||a.format)+'</span>'+(c.small?'<span class="cv-s">'+esc(c.small)+'</span>':'')+
-    '<span class="cv-e" aria-hidden="true">E</span></div>';
+  var t=main(a),c=a.cover||{},col=c.color||t.color;
+  if(a.photo&&IMG[a.photo])return '<div class="vis full" data-c="'+col+'">'+img(a.photo,a.photoAlt||"")+'</div>';
+  return '<div class="vis cover'+(c.sticker&&IMG[c.sticker]?" has-st":"")+'" data-c="'+col+'">'+stripesSVG(PAIRS[col]||PAIRS.rouge,9,"cv-bg")+
+    (c.sticker&&IMG[c.sticker]?img(c.sticker,"","cv-st"):'<span class="cv-e" aria-hidden="true">E</span>')+
+    '<span class="cv-k">'+esc(t.name)+'</span>'+
+    '<span class="cv-big">'+esc(c.big||a.format)+'</span>'+(c.small?'<span class="cv-s">'+esc(c.small)+'</span>':'')+'</div>';
 }
 function chipT(t){return '<a class="chip" data-c="'+t.color+'" href="#blog-'+t.slug+'">'+esc(t.short)+'</a>';}
 function meta(a){return '<div class="meta">'+themesOf(a).map(function(t){return '<span class="chip" data-c="'+t.color+'">'+esc(t.short)+'</span>';}).join("")+'<span>'+esc(a.format)+'</span><span>'+a.read+' min</span></div>';}
@@ -35,8 +37,9 @@ function mailBox(dark){
 }
 
 /* ---------- bandes ondulées (motif du dossier de DA) ---------- */
-function stripesSVG(){
-  var W=1200,H=900,P=300,n=15,bw=W/n,amp=14,cols=["#C82828","#38B6FF"],out="";
+function stripesSVG(cols,n,cls){
+  cols=cols||["#C82828","#38B6FF"];n=n||15;
+  var W=1200,H=900,P=300,bw=W/n,amp=14*15/n,out="";
   for(var i=0;i<n;i++){
     var x0=i*bw,pts=[],back=[];
     for(var y=0;y<=H+P;y+=25){
@@ -45,7 +48,7 @@ function stripesSVG(){
     }
     out+='<polygon fill="'+cols[i%2]+'" points="'+pts.concat(back).join(" ")+'"/>';
   }
-  return '<svg class="stripes" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g>'+out+'</g></svg>';
+  return '<svg class="'+(cls||"stripes")+'" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g>'+out+'</g></svg>';
 }
 
 /* ---------- écran de télévision ---------- */
