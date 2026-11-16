@@ -225,6 +225,34 @@ function player(e){
     '<div class="ap-mid"><input type="range" class="ap-bar" min="0" max="1000" value="0" aria-label="Position dans l\'épisode"><div class="ap-t"><span class="ap-cur">0:00</span><span class="ap-dur">'+esc(e.duration||"")+'</span></div></div></div>';
 }
 function fmt(t){t=Math.floor(t||0);var h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return (h?h+":"+(m<10?"0":""):"")+m+":"+(s<10?"0":"")+s;}
+function epSlug(e){return e.slug||String(e.title||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");}
+/* Un épisode peut exister en audio et en vidéo : on les réunit par slug pour sa page dédiée. */
+function allEps(){
+  var map={},order=[];
+  D.podcast.forEach(function(p){(p.episodes||[]).forEach(function(e){
+    var k=epSlug(e);if(!map[k]){map[k]={slug:k,formats:[]};order.push(k);}
+    var m=map[k];for(var x in e){if(e[x]!==""&&e[x]!=null&&m[x]==null)m[x]=e[x];}m.formats.push(p.id);});});
+  return order.map(function(k){return map[k];}).sort(function(a,b){return (b.num||0)-(a.num||0);});
+}
+function epBySlug(sl){return allEps().filter(function(e){return e.slug===sl;})[0]||null;}
+function credit(e){return e.credit?'<p class="ep-credit"><span class="kicker">Vidéo</span> '+esc(e.credit)+'</p>':"";}
+function epRows(list){return '<ol class="eps">'+list.map(function(e){return '<li><a href="#e-'+esc(epSlug(e))+'"><b>'+esc(e.title)+'</b><span>'+epMeta(e)+'</span></a></li>';}).join("")+'</ol>';}
+function pageEpisode(sl){
+  var e=epBySlug(sl);if(!e)return null;
+  var others=allEps().filter(function(x){return x.slug!==e.slug;});
+  var wide=e.imgWide||e.img;
+  var vid=e.youtube?'<div class="ep-vid"><h2 class="ep-sub">En vidéo</h2><div class="stage16" data-c="corail">'+(wide?img(wide,"","bgphoto"):'<span class="cv-e big" aria-hidden="true">E</span>')+
+    '<button type="button" class="js-yt yt yt-plain" data-yt="'+esc(e.youtube)+'" aria-label="Lancer la vidéo : '+esc(e.title)+'"><span class="playbtn">▶</span></button></div>'+
+    '<div class="ep-txt" style="margin-top:22px">'+credit(e)+'</div></div>':"";
+  return '<section class="sec ep-page"><div class="wrap">'+
+    '<a class="ep-back" href="#podcast">← Le podcast</a>'+
+    '<div class="audio-card" data-c="violet"><div class="cover'+(e.img?" photo":"")+'">'+(e.img?img(e.img,e.imgAlt||("Photo de l\'épisode : "+e.title)):'<span class="cv-e big" aria-hidden="true">E</span>')+'<span class="epn">EP.'+String(e.num||1).padStart(2,"0")+'</span></div>'+
+    '<div class="ep-txt"><span class="kicker">'+epMeta(e)+'</span><h1>'+esc(e.title)+'</h1>'+(e.desc?'<p>'+esc(e.desc)+'</p>':"")+
+    (e.spotify?spotifyBlock(e.spotify,e.title):"")+'<div class="ep-links">'+epLinks(e)+'</div></div></div>'+
+    vid+
+    (others.length?'<div class="eplist" style="margin-top:clamp(40px,7vw,80px)"><span class="kicker">Autres épisodes</span>'+epRows(others)+'</div>':"")+
+  '</div></section>'+emergeBlock();
+}
 function epMeta(e){return [e.num?"Épisode "+e.num:"",e.guest,e.date,e.duration].filter(Boolean).map(esc).join(" · ");}
 function stage(p){
   var e=latest(p);
@@ -232,19 +260,17 @@ function stage(p){
     var inner=e&&e.youtube?
       '<button type="button" class="js-yt yt" data-yt="'+esc(e.youtube)+'" aria-label="Lancer la vidéo : '+esc(e.title)+'"><span class="playbtn">▶</span><span class="yt-t"><span class="kicker">'+epMeta(e)+'</span><b>'+esc(e.title)+'</b></span></button>':
       '<div class="yt soon-yt"><span class="kicker">Podcast vidéo</span><b>'+esc(p.status)+'</b><span>Les épisodes se regarderont ici, en grand.</span></div>';
-    return '<div class="stage16" data-c="'+p.color+'">'+(e&&e.img?img(e.img,"","bgphoto"):'<span class="cv-e big" aria-hidden="true">E</span>')+inner+'</div>'+
-      (e?'<div class="ep-txt">'+(e.desc?'<p>'+esc(e.desc)+'</p>':"")+(e.credit?'<p class="ep-credit"><span class="kicker">Vidéo</span> '+esc(e.credit)+'</p>':"")+'<div class="ep-links">'+epLinks(e)+'</div></div>':"");
+    return '<div class="stage16" data-c="'+p.color+'">'+(e&&(e.imgWide||e.img)?img(e.imgWide||e.img,"","bgphoto"):'<span class="cv-e big" aria-hidden="true">E</span>')+inner+'</div>'+
+      (e?'<div class="ep-txt">'+(e.desc?'<p>'+esc(e.desc)+'</p>':"")+credit(e)+'<div class="ep-links">'+epLinks(e)+'<a class="more" href="#e-'+esc(epSlug(e))+'">Page de l\'épisode →</a></div></div>':"");
   }
   return '<div class="audio-card" data-c="'+p.color+'"><div class="cover'+(e&&e.img?" photo":"")+'">'+(e&&e.img?img(e.img,"Photo de l\'épisode"):'<span class="cv-e big" aria-hidden="true">E</span>')+'<span class="epn">'+(e&&e.num?"EP."+String(e.num).padStart(2,"0"):"EP.01")+'</span></div>'+
     '<div class="ep-txt"><span class="kicker">'+(e?epMeta(e):"Podcast audio · "+esc(p.status))+'</span><h3>'+(e?esc(e.title):"Le premier épisode arrive très bientôt")+'</h3>'+
-    (e&&e.desc?'<p>'+esc(e.desc)+'</p>':(e?'':'<p>'+esc(p.desc)+'</p>'))+audioZone(e,p)+'<div class="ep-links">'+(e?epLinks(e):'<span class="status"><i></i>'+esc(p.status)+'</span>')+'</div></div></div>';
+    (e&&e.desc?'<p>'+esc(e.desc)+'</p>':(e?'':'<p>'+esc(p.desc)+'</p>'))+audioZone(e,p)+'<div class="ep-links">'+(e?epLinks(e)+'<a class="more" href="#e-'+esc(epSlug(e))+'">Page de l\'épisode →</a>':'<span class="status"><i></i>'+esc(p.status)+'</span>')+'</div></div></div>';
 }
 function epList(p){
   var rest=(p.episodes||[]).slice(1);
   if(!rest.length)return "";
-  return '<div class="eplist"><span class="kicker">Tous les épisodes</span><ol class="eps">'+rest.map(function(e){
-    var url=e.youtube?"https://www.youtube.com/watch?v="+e.youtube:(e.spotify||e.apple||e.deezer||"");
-    return '<li><a href="'+esc(url||"#podcast")+'"'+(url?' target="_blank" rel="noopener"':"")+'><b>'+esc(e.title)+'</b><span>'+epMeta(e)+'</span></a></li>';}).join("")+'</ol></div>';
+  return '<div class="eplist"><span class="kicker">Tous les épisodes</span>'+epRows(rest)+'</div>';
 }
 function pagePodcastPage(){
   var P=D.podcast;
@@ -411,6 +437,7 @@ function toPath(h){
   if(r.indexOf("blog-")===0)return "/blog/theme/"+r.slice(5)+"/";
   if(r.indexOf("a-")===0)return "/blog/"+r.slice(2)+"/";
   if(r==="podcast"||r==="antenne")return "/podcast/";
+  if(r.indexOf("e-")===0)return "/podcast/"+r.slice(2)+"/";
   if(r==="agir")return "/agir/";
   if(r==="proposer")return "/agir/#proposer";
   if(r==="apropos")return "/a-propos/";
@@ -423,6 +450,7 @@ function fromPath(p){
   if(p==="/blog/")return "blog";
   if((m=p.match(/^\/blog\/theme\/([^\/]+)\/$/)))return "blog-"+m[1];
   if((m=p.match(/^\/blog\/([^\/]+)\/$/)))return "a-"+m[1];
+  if((m=p.match(/^\/podcast\/([^\/]+)\/$/)))return "e-"+m[1];
   return ({"/podcast/":"podcast","/agir/":"agir","/a-propos/":"apropos"})[p]||"une";
 }
 function fixLinks(root){
@@ -436,6 +464,7 @@ function info(route){
   if(route==="une")return {t:"Émergences · "+D.site.baseline,c:"rouge",d:D.site.pitch+" "+D.site.tagline};
   if(route==="blog")return {t:"Notre blog · Émergences",c:"rouge",d:"Articles, décryptages et portraits d'Émergences."};
   if(route.indexOf("blog-")===0){var th=theme(route.slice(5));if(th)return {t:th.name+" · Le blog d'Émergences",c:th.color,d:th.desc};}
+  if(route.indexOf("e-")===0){var ep=epBySlug(route.slice(2));if(ep)return {t:ep.title+" · Le podcast Émergences",c:"violet",d:ep.desc||""};}
   if(route.indexOf("a-")===0){var a=art(route.slice(2));if(a)return {t:a.title+" · Émergences",c:main(a).color,d:a.chapo};}
   return ({podcast:{t:"Le podcast · Émergences",c:"corail",d:"Le podcast d'Émergences, en vidéo et en audio."},
     agir:{t:"Passer à l'action · Émergences",c:"rouge",d:"Faire connaître un projet, proposer un sujet, rejoindre Émergences."},
@@ -451,13 +480,14 @@ function render(route){
   else if(route.indexOf("blog-")===0&&theme(route.slice(5)))html=pageBlog(route.slice(5));
   else if(route.indexOf("a-")===0)html=pageArticle(route.slice(2));
   else if(route==="podcast")html=pagePodcastPage();
+  else if(route.indexOf("e-")===0)html=pageEpisode(route.slice(2));
   else if(route==="agir"){html=pageAgir();if((location.hash||"")==="#proposer")scrollTo="proposer";}
   else if(route==="apropos")html=pageApropos();
   if(html===null){route="une";html=pageHome();}
   app.innerHTML=html;
   var i=info(route)||info("une");document.title=i.t;
   var md=document.querySelector('meta[name="description"]');if(md)md.setAttribute("content",i.d);
-  var sect=route.indexOf("blog")===0||route.indexOf("a-")===0?"blog":route;
+  var sect=route.indexOf("blog")===0||route.indexOf("a-")===0?"blog":route.indexOf("e-")===0?"podcast":route;
   $$("[data-r]").forEach(function(el){if(el.getAttribute("data-r")===sect)el.setAttribute("aria-current","page");else el.removeAttribute("aria-current");});
   wire(route);
   return scrollTo;

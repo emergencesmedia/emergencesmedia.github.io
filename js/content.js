@@ -55,11 +55,11 @@ window.EMERGENCES = {
     { id: "audio", ch: "01", name: "Le podcast audio", short: "Audio", color: "violet", img: "mic",
       desc: "Une conversation avec une personne qui fait bouger les choses, à écouter partout : dans le métro, en marchant, en cuisinant.",
       status: "Nouvel épisode le 15 de chaque mois", episodes: [
-        { num: 2, title: "Avoir 20 ans dans un monde en crise : le regard de Pierre Haski", guest: "Pierre Haski, journaliste et grand reporter",
+        { num: 2, slug: "avoir-20-ans-dans-un-monde-en-crise-pierre-haski", img: "ep02-cover", imgWide: "ep02-wide", imgAlt: "Pierre Haski entouré de l'équipe d'Émergences, devant une carte du monde", title: "Avoir 20 ans dans un monde en crise : le regard de Pierre Haski", guest: "Pierre Haski, journaliste et grand reporter",
           date: "16 novembre 2026", dateISO: "2026-11-16", duration: "1 h 25",
           desc: "Comment comprendre le monde d'aujourd'hui quand tout semble incertain ? Et surtout, quelle place notre génération peut-elle y prendre ? Dans cet épisode, nous échangeons avec Pierre Haski, journaliste et grand reporter, sur les grands bouleversements de notre époque : conflits internationaux, engagement de la jeunesse, réseaux sociaux, désinformation et avenir de l'Europe. Entre expériences personnelles, réflexions et conseils, une conversation intergénérationnelle pour mieux comprendre le monde qui nous entoure et réfléchir à la manière dont nous pouvons agir sur son avenir.",
           spotify: "https://open.spotify.com/episode/4t7d21PdGLnSXKkV105e0x", apple: "", deezer: "" },
-        { num: 1, title: "Notre République : comment la comprendre ?", guest: "Swan Riché, fondateur de La Fresque de la République",
+        { num: 1, slug: "notre-republique-comment-la-comprendre", title: "Notre République : comment la comprendre ?", guest: "Swan Riché, fondateur de La Fresque de la République",
           date: "15 octobre 2026", dateISO: "2026-10-15", duration: "18 min", img: "ep01-cover",
           desc: "Pour ce premier épisode, Émergences reçoit Swan Riché, fondateur de La Fresque de la République, un atelier qui permet de comprendre comment fonctionnent nos institutions. Au programme : la Ve République, l'engagement citoyen et notre rapport à la vie démocratique. Une conversation pour questionner notre citoyenneté.",
           spotify: "https://open.spotify.com/episode/6z4ZKEAjbwktNby0YTkeRy", apple: "", deezer: "" }
@@ -67,7 +67,7 @@ window.EMERGENCES = {
     { id: "video", ch: "02", name: "Le podcast vidéo", short: "Vidéo", color: "corail", img: "camera",
       desc: "La conversation filmée, en entier sur YouTube et en extraits sur Instagram et TikTok.",
       status: "Nouvel épisode le 15 de chaque mois", episodes: [
-        { num: 2, title: "Avoir 20 ans dans un monde en crise : le regard de Pierre Haski", guest: "Pierre Haski, journaliste et grand reporter",
+        { num: 2, slug: "avoir-20-ans-dans-un-monde-en-crise-pierre-haski", img: "ep02-cover", imgWide: "ep02-wide", imgAlt: "Pierre Haski entouré de l'équipe d'Émergences, devant une carte du monde", title: "Avoir 20 ans dans un monde en crise : le regard de Pierre Haski", guest: "Pierre Haski, journaliste et grand reporter",
           date: "16 novembre 2026", dateISO: "2026-11-16", duration: "1 h 25",
           desc: "Comment comprendre le monde d'aujourd'hui quand tout semble incertain ? Et surtout, quelle place notre génération peut-elle y prendre ? Dans cet épisode, nous échangeons avec Pierre Haski, journaliste et grand reporter, sur les grands bouleversements de notre époque : conflits internationaux, engagement de la jeunesse, réseaux sociaux, désinformation et avenir de l'Europe. Entre expériences personnelles, réflexions et conseils, une conversation intergénérationnelle pour mieux comprendre le monde qui nous entoure et réfléchir à la manière dont nous pouvons agir sur son avenir.",
           youtube: "oqHyQLVqgHg", credit: "norva.studio", spotify: "https://open.spotify.com/episode/4t7d21PdGLnSXKkV105e0x", apple: "", deezer: "" }

@@ -72,6 +72,8 @@ Dans `js/content.js`, section `podcast`, ajoutez dans `episodes: []` du bon form
 - Le lien de l'émission entière va dans `spotify` en haut du fichier (section `site`).
 - Le plus récent en premier : il s'affiche en grand, les suivants passent dans la liste « Tous les épisodes ».
 
+**Page de l'épisode** : chaque épisode a sa propre page (`/podcast/slug-de-l-episode/`), avec photo, description, lecteur Spotify et vidéo YouTube. Un même épisode en audio et en vidéo doit avoir le **même `slug`** dans les deux formats. Ajoutez aussi `img: "ep03-cover"` (carré) et `imgWide: "ep03-wide"` (16:9) pour la photo, et `credit: "nom du studio"` pour le crédit vidéo. Après l'ajout, lancez `python3 outils/generer-episodes.py` (ou envoyez-moi les liens : je m'en occupe).
+
 Renseignez aussi les liens `spotify`, `youtube` et `tiktok` en haut du fichier : ils remplacent automatiquement les mentions « bientôt ».
 
 ## À faire avant l'ouverture au public
