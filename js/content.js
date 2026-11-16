@@ -55,6 +55,10 @@ window.EMERGENCES = {
     { id: "audio", ch: "01", name: "Le podcast audio", short: "Audio", color: "violet", img: "mic",
       desc: "Une conversation avec une personne qui fait bouger les choses, à écouter partout : dans le métro, en marchant, en cuisinant.",
       status: "Nouvel épisode le 15 de chaque mois", episodes: [
+        { num: 2, title: "Avoir 20 ans dans un monde en crise : le regard de Pierre Haski", guest: "Pierre Haski, journaliste",
+          date: "16 novembre 2026", dateISO: "2026-11-16", duration: "1 h 25",
+          desc: "Comment comprendre le monde d'aujourd'hui quand tout semble incertain ? Émergences reçoit le journaliste Pierre Haski pour parler des grands bouleversements du moment : conflits internationaux, engagement des jeunes, réseaux sociaux, désinformation et avenir de l'Europe. Une conversation entre générations, faite d'expériences personnelles, de réflexions et de conseils.",
+          spotify: "https://open.spotify.com/episode/4t7d21PdGLnSXKkV105e0x", apple: "", deezer: "" },
         { num: 1, title: "Notre République : comment la comprendre ?", guest: "Swan Riché, fondateur de La Fresque de la République",
           date: "15 octobre 2026", dateISO: "2026-10-15", duration: "18 min", img: "ep01-cover",
           desc: "Pour ce premier épisode, Émergences reçoit Swan Riché, fondateur de La Fresque de la République, un atelier qui permet de comprendre comment fonctionnent nos institutions. Au programme : la Ve République, l'engagement citoyen et notre rapport à la vie démocratique. Une conversation pour questionner notre citoyenneté.",
@@ -62,7 +66,12 @@ window.EMERGENCES = {
       ] },
     { id: "video", ch: "02", name: "Le podcast vidéo", short: "Vidéo", color: "corail", img: "camera",
       desc: "La conversation filmée, en entier sur YouTube et en extraits sur Instagram et TikTok.",
-      status: "Bientôt sur YouTube", episodes: [] }
+      status: "Nouvel épisode le 15 de chaque mois", episodes: [
+        { num: 2, title: "Avoir 20 ans dans un monde en crise : le regard de Pierre Haski", guest: "Pierre Haski, journaliste",
+          date: "16 novembre 2026", dateISO: "2026-11-16", duration: "1 h 25",
+          desc: "Comment comprendre le monde d'aujourd'hui quand tout semble incertain ? Émergences reçoit le journaliste Pierre Haski pour parler des grands bouleversements du moment : conflits internationaux, engagement des jeunes, réseaux sociaux, désinformation et avenir de l'Europe. Une conversation entre générations, faite d'expériences personnelles, de réflexions et de conseils.",
+          youtube: "oqHyQLVqgHg", spotify: "https://open.spotify.com/episode/4t7d21PdGLnSXKkV105e0x", apple: "", deezer: "" }
+      ] }
   ],
 
   team: [
