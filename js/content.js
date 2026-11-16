@@ -23,6 +23,7 @@ window.EMERGENCES = {
     pitch: "Le média numérique pensé par et pour les jeunes.",
     founded: "2026",
     rhythm: "le 15 de chaque mois",
+    une: "avoir-20-ans-dans-un-monde-en-crise-pierre-haski",   // épisode mis « À la une » sur l'accueil (slug), "" pour remettre l'article
     podcastName: "Avoir 20 ans aujourd'hui",   // nom de l'émission sur Spotify   // rythme de publication du podcast
     email: "info.emergencesmedia@gmail.com",
     instagram: "https://www.instagram.com/emergencesmedia/",
