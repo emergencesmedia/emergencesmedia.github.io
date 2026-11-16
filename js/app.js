@@ -233,7 +233,7 @@ function stage(p){
       '<button type="button" class="js-yt yt" data-yt="'+esc(e.youtube)+'" aria-label="Lancer la vidéo : '+esc(e.title)+'"><span class="playbtn">▶</span><span class="yt-t"><span class="kicker">'+epMeta(e)+'</span><b>'+esc(e.title)+'</b></span></button>':
       '<div class="yt soon-yt"><span class="kicker">Podcast vidéo</span><b>'+esc(p.status)+'</b><span>Les épisodes se regarderont ici, en grand.</span></div>';
     return '<div class="stage16" data-c="'+p.color+'">'+(e&&e.img?img(e.img,"","bgphoto"):'<span class="cv-e big" aria-hidden="true">E</span>')+inner+'</div>'+
-      (e?'<div class="ep-txt">'+(e.desc?'<p>'+esc(e.desc)+'</p>':"")+'<div class="ep-links">'+epLinks(e)+'</div></div>':"");
+      (e?'<div class="ep-txt">'+(e.desc?'<p>'+esc(e.desc)+'</p>':"")+(e.credit?'<p class="ep-credit"><span class="kicker">Vidéo</span> '+esc(e.credit)+'</p>':"")+'<div class="ep-links">'+epLinks(e)+'</div></div>':"");
   }
   return '<div class="audio-card" data-c="'+p.color+'"><div class="cover'+(e&&e.img?" photo":"")+'">'+(e&&e.img?img(e.img,"Photo de l\'épisode"):'<span class="cv-e big" aria-hidden="true">E</span>')+'<span class="epn">'+(e&&e.num?"EP."+String(e.num).padStart(2,"0"):"EP.01")+'</span></div>'+
     '<div class="ep-txt"><span class="kicker">'+(e?epMeta(e):"Podcast audio · "+esc(p.status))+'</span><h3>'+(e?esc(e.title):"Le premier épisode arrive très bientôt")+'</h3>'+
