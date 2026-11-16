@@ -33,6 +33,13 @@ for f in glob.glob("**/*.html",recursive=True):
     if not m: continue
     d=json.loads(m.group(1)); n=dict(d); n.update({k:v for k,v in keys.items() if k not in d})
     if n!=d: s=s[:m.start(1)]+json.dumps(n,ensure_ascii=False)+s[m.end(1):]; open(f,"w").write(s)
+# 1b) anti-cache : les navigateurs rechargent CSS/JS dès qu'ils changent
+import hashlib
+ver={f:hashlib.md5(open(f,"rb").read()).hexdigest()[:8] for f in ("css/style.css","js/content.js","js/app.js")}
+for f in glob.glob("**/*.html",recursive=True):
+    s0=open(f).read(); s1=s0
+    for k,v in ver.items(): s1=re.sub(r'(["\']/'+re.escape(k)+r')(\?v=[0-9a-f]+)?(["\'])',r'\1?v='+v+r'\3',s1)
+    if s1!=s0: open(f,"w").write(s1)
 # 2) pages épisodes
 tpl=open("podcast/index.html").read()
 def ld_episode(e,url):
